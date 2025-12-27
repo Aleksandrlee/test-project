@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - feature/*
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t my-web-app:ci .
+
+      - name: Validate docker compose file
+        run: docker compose -f docker-compose.yml config
+
+      - name: Smoke test container
+        run: |
+          docker run -d --name my-web-app-ci -p 8080:80 my-web-app:ci
+          sleep 2
+          curl -fsS http://localhost:8080 | grep -q "Hello from ED-IT"
+          docker rm -f my-web-app-ci
