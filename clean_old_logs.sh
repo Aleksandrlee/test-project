@@ -18,7 +18,7 @@ fi
 echo "Files found:"
 echo "$FILES"
 
-read -p "Удалить эти файлы? (y/n): " CONFIRM
+read -r -p "Удалить эти файлы? (y/n): " CONFIRM
 
 if [ "$CONFIRM" = "y" ]; then
 
