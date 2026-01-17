@@ -1,4 +1,4 @@
-# DevOps Test Task — Yandex Browser for Organizations
+# DevOps project
 
 ## Что это за проект
 
